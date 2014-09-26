@@ -5,7 +5,10 @@ require 'google_calendar'
 require 'ruby_spark'
 require 'awesome_print'
 
+# So Google knows you're not evil
 APP_NAME = 'com.alexforey.door-sign'
+
+# Array of Google Calendar Names to check
 CALENDARS = ['School', 'Home', 'SPS Film']
 
 # Create a calendar object from a given name
