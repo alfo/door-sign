@@ -1,0 +1,87 @@
+#! /usr/bin/env ruby
+
+require 'rubygems'
+require 'google_calendar'
+require 'ruby_spark'
+require 'awesome_print'
+
+APP_NAME = 'com.alexforey.door-sign'
+CALENDARS = ['School', 'Home', 'SPS Film']
+
+# Create a calendar object from a given name
+def calendar(name)
+  Google::Calendar.new(:username => ENV['USERNAME'],
+                        :password => ENV['PASSWORD'],
+                        :app_name => APP_NAME,
+                        :calendar => name)
+end
+
+# Find out which events are happening right now
+def events_now
+
+  # Open empty array
+  events = []
+
+  # Loop over all the calendars
+  CALENDARS.each do |name|
+
+    # Get events occuring right now
+    cal_events = calendar(name).find_events_in_range(Time.now, Time.now + 60)
+
+    # Is there more than one event right now?
+    if cal_events.kind_of?(Array)
+
+      # Yes, so loop over each one and add it to the array
+      cal_events.each do |e|
+        events << {event: e, cal: name} unless e.nil?
+      end
+
+    else
+      # No, so just add the one
+      events << {event: cal_events, cal: name} unless cal_events.nil?
+
+    end
+
+  end
+
+  # Return the final list
+  return events
+
+end
+
+##### Main Script #####
+
+# Get the events
+events = events_now
+
+# Are there more than one going on at the same time?
+if events.length > 1
+
+  # Yes, so pick one depending on the time
+  if Time.now.min.odd?
+    event = events[0]
+  else
+    event = events[1]
+  end
+
+elsif events.length == 1
+
+  # No, just one, so pick that
+  event = events.first
+
+end
+
+# Did we end up with an event?
+if event
+  # Yes, so build the payload with "|" between each part
+  payload = "#{event[:event].title}|#{event[:event].where}|(#{event[:cal]} Calendar)"
+else
+  # No, so say we're not busy
+  payload = " | Not busy| "
+end
+
+# Initalise the core
+core = RubySpark::Core.new(ENV['SPARK_ID'], ENV['SPARK_TOKEN'])
+
+# Send the stuff to the core
+core.function("update", payload)
