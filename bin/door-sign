@@ -77,10 +77,10 @@ end
 # Did we end up with an event?
 if event
   # Yes, so build the payload with "|" between each part
-  payload = "#{event[:event].title}|#{event[:event].where}|(#{event[:cal]} Calendar)"
+  payload = "Alex is at:|#{event[:event].title}|#{event[:event].where}|(#{event[:cal]} Calendar)"
 else
   # No, so say we're not busy
-  payload = " | Not busy| "
+  payload = "Alex is currently| | Not busy| "
 end
 
 # Initalise the core
