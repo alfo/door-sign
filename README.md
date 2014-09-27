@@ -11,6 +11,10 @@ You need:
 * [5V Regulator](http://www.ebay.co.uk/itm/L7805CV-Voltage-Regulator-5V-Pack-of-10-/390423690236?pt=UK_BOI_Electrical_Components_Supplies_ET&hash=item5ae710bbfc) - £2.39 for 10
 * Some breadboard wires
 
+Wire it up like:
+
+![Breadboard](http://i.imgur.com/GKMMska.png)
+
 ## Firmware
 
 Make a new project in the Spark online IDE named whatever you want, then copy in the contents of `door-sign.ino`. Click the + button in the tab bar of the IDE, and add a .h and .cpp file for the LiquidCrystal library.
