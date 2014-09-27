@@ -9,7 +9,7 @@ require 'awesome_print'
 APP_NAME = 'com.alexforey.door-sign'
 
 # Array of Google Calendar Names to check
-CALENDARS = ['School', 'Home', 'SPS Film']
+CALENDARS = ['School', 'Home', 'Work', 'SPS Film', 'Lessons']
 
 # Create a calendar object from a given name
 def calendar(name)
