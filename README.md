@@ -2,6 +2,8 @@
 
 An LCD sign to go on my door that displays what's currently happening in my calendar, called "Door Sign" because nobody who was sitting around me at the time had a better name.
 
+![Photo](http://newfangled.me/images/door-sign.jpg)
+
 ## Hardware
 
 You need:
