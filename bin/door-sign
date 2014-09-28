@@ -40,6 +40,7 @@ def events_now
       end
 
     else
+      
       # No, so just add the one
       events << {event: cal_events, cal: name} unless cal_events.nil?
 
@@ -86,5 +87,25 @@ end
 # Initalise the core
 core = RubySpark::Core.new(ENV['SPARK_ID'], ENV['SPARK_TOKEN'])
 
-# Send the stuff to the core
+# Send the text to the core
 core.function("update", payload)
+
+# Figure out whether the backlight should be on or off
+now = Time.now
+
+# The early and latest (yesterday at 22:00, toady at 07:00)
+early = Time.local(now.year, now.month, (now.day - 1), 22)
+late = Time.local(now.year, now.month, now.day, 7)
+
+# Compare them
+if now.between?(early, late)
+
+  # Turn it off at night
+  core.function("backlight", "off")
+
+else
+
+  # Turn it on during the day
+  core.function("backlight", "on")
+
+end
