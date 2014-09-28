@@ -40,7 +40,7 @@ def events_now
       end
 
     else
-      
+
       # No, so just add the one
       events << {event: cal_events, cal: name} unless cal_events.nil?
 
@@ -93,12 +93,8 @@ core.function("update", payload)
 # Figure out whether the backlight should be on or off
 now = Time.now
 
-# The early and latest (yesterday at 22:00, toady at 07:00)
-early = Time.local(now.year, now.month, (now.day - 1), 22)
-late = Time.local(now.year, now.month, now.day, 7)
-
 # Compare them
-if now.between?(early, late)
+if now.hour > 22 or now.hour < 7
 
   # Turn it off at night
   core.function("backlight", "off")
