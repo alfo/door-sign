@@ -1,26 +1,36 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    activesupport (4.1.4)
+      i18n (~> 0.6, >= 0.6.9)
+      json (~> 1.7, >= 1.7.7)
+      minitest (~> 5.1)
+      thread_safe (~> 0.1)
+      tzinfo (~> 1.1)
     addressable (2.3.6)
-    awesome_print (1.2.0)
     google_calendar (0.3.1)
       addressable (>= 2.2.2)
       nokogiri (>= 1.4.4)
     httparty (0.13.1)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
+    i18n (0.6.11)
     json (1.8.1)
     mini_portile (0.6.0)
+    minitest (5.4.0)
     multi_xml (0.5.5)
     nokogiri (1.6.3.1)
       mini_portile (= 0.6.0)
     ruby_spark (1.0.0)
       httparty (~> 0.13)
+    thread_safe (0.3.4)
+    tzinfo (1.2.1)
+      thread_safe (~> 0.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  awesome_print
+  activesupport
   google_calendar
   ruby_spark

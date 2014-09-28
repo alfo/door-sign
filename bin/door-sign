@@ -3,7 +3,7 @@
 require 'rubygems'
 require 'google_calendar'
 require 'ruby_spark'
-require 'awesome_print'
+require 'active_support'
 
 # So Google knows you're not evil
 APP_NAME = 'com.alexforey.door-sign'
@@ -91,7 +91,7 @@ core = RubySpark::Core.new(ENV['SPARK_ID'], ENV['SPARK_TOKEN'])
 core.function("update", payload)
 
 # Figure out whether the backlight should be on or off
-now = Time.now
+now = Time.now.in_time_zone("London")
 
 # Compare them
 if now.hour > 22 or now.hour < 7
