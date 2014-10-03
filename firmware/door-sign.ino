@@ -31,9 +31,19 @@ void loop() {
 // Backlight on/off function
 int backlight(String args) {
   if (args == "on") {
+
+    // Set the backlight of the LCD to on
     lcd->backlight();
+
+    // Put the Spark's inbuilt LED to 100%
+    RGB.brightness(255);
   } else if (args == "off") {
+
+    // Set the backlight of the LCD to off
     lcd->noBacklight();
+
+    // Dim the inbuild LED
+    RGB.brightness(25);
   }
 
   return 1;
