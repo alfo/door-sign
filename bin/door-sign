@@ -3,7 +3,7 @@
 require 'rubygems'
 require 'google_calendar'
 require 'ruby_spark'
-require 'active_support'
+require 'active_support/all'
 
 # So Google knows you're not evil
 APP_NAME = 'com.alexforey.door-sign'
@@ -94,7 +94,7 @@ core.function("update", payload)
 now = Time.now.in_time_zone("London")
 
 # Compare them
-if now.hour > 22 or now.hour < 7
+if now.hour >= 22 or now.hour <= 7
 
   # Turn it off at night
   core.function("backlight", "off")
