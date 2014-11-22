@@ -5,11 +5,8 @@ require 'google_calendar'
 require 'ruby_spark'
 require 'active_support/all'
 
-# So Google knows you're not evil
-APP_NAME = 'com.alexforey.door-sign'
-
 # Array of Google Calendar Names to check
-CALENDARS = ['alexforey.com_pkbcsa4uk7jtog8tkj65hndpn8@group.calendar.google.com', 'alexforey.com_g0l2pjg9tbevhr066glf4ub6mc@group.calendar.google.com', 'alexforey.com_d51bdglmg2o9t0nk86ce8vcqik@group.calendar.google.com', 'ki1vv5ieoeljjtvh7ihumje7go@group.calendar.google.com', 'alexforey.com_9rcvmgk971lv19biuqku4bla98@group.calendar.google.com']
+CALENDARS = ['alexforey.com_pkbcsa4uk7jtog8tkj65hndpn8@group.calendar.google.com']#, 'alexforey.com_g0l2pjg9tbevhr066glf4ub6mc@group.calendar.google.com', 'alexforey.com_d51bdglmg2o9t0nk86ce8vcqik@group.calendar.google.com', 'ki1vv5ieoeljjtvh7ihumje7go@group.calendar.google.com', 'alexforey.com_9rcvmgk971lv19biuqku4bla98@group.calendar.google.com']
 
 # Create a calendar object from a given name
 def calendar(name)
