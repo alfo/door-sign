@@ -13,10 +13,11 @@ CALENDARS = ['School', 'Home', 'Work', 'SPS Film', 'Lessons']
 
 # Create a calendar object from a given name
 def calendar(name)
-  Google::Calendar.new(:username => ENV['USERNAME'],
-                        :password => ENV['PASSWORD'],
-                        :app_name => APP_NAME,
-                        :calendar => name)
+  Google::Calendar.new(:client_id => ENV['CLIENT_ID'],
+                        :client_secret => ENV['CLIENT_SECRET'],
+                        :redirect_url => "urn:ietf:wg:oauth:2.0:oob",
+                        :calendar => name,
+                        :refresh_token => ENV['REFRESH_TOKEN'])
 end
 
 # Find out which events are happening right now
