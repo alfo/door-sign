@@ -1,14 +1,24 @@
 require 'rubygems'
 require 'google_calendar'
 
+if ENV['CLIENT_ID']
+  client_id = ENV['CLIENT_ID']
+else
+  puts "Enter your client id"
+  client_id = $stdin.gets.chomp
+end
+
+if ENV['CLIENT_SECRET']
+  client_secret = ENV['CLIENT_SECRET']
+else
+  puts "Enter your client secret"
+  client_secret = $stdin.gets.chomp
+end
+
 puts "Enter your calendar id"
 calendar_id = $stdin.gets.chomp
 
-puts "Enter your client id"
-client_id = $stdin.gets.chomp
 
-puts "Enter your client secret"
-client_secret = $stdin.gets.chomp
 
 # Create an instance of the calendar.
 cal = Google::Calendar.new(:client_id     => client_id,
@@ -25,7 +35,5 @@ puts "\nCopy the code that Google returned and paste it here:"
 # Pass the ONE TIME USE access code here to login and get a refresh token that you can use for access from now on.
 refresh_token = cal.login_with_auth_code( $stdin.gets.chomp )
 
-puts "\nMake sure you SAVE YOUR REFRESH TOKEN so you don't have to prompt the user to approve access again."
-puts "your refresh token is:\n\t#{refresh_token}\n"
-puts "Press return to continue"
-$stdin.gets.chomp
+puts "Now run the following command:"
+puts "heroku config:set REFRESH_TOKEN='#{refresh_token}'"
