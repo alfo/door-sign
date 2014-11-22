@@ -6,15 +6,25 @@ require 'ruby_spark'
 require 'active_support/all'
 
 # Array of Google Calendar Names to check
-CALENDARS = ['alexforey.com_pkbcsa4uk7jtog8tkj65hndpn8@group.calendar.google.com']#, 'alexforey.com_g0l2pjg9tbevhr066glf4ub6mc@group.calendar.google.com', 'alexforey.com_d51bdglmg2o9t0nk86ce8vcqik@group.calendar.google.com', 'ki1vv5ieoeljjtvh7ihumje7go@group.calendar.google.com', 'alexforey.com_9rcvmgk971lv19biuqku4bla98@group.calendar.google.com']
+CALENDARS = {
+  'School' => 'alexforey.com_pkbcsa4uk7jtog8tkj65hndpn8@group.calendar.google.com',
+  'Home' => 'alexforey.com_g0l2pjg9tbevhr066glf4ub6mc@group.calendar.google.com',
+  'Work' => 'alexforey.com_d51bdglmg2o9t0nk86ce8vcqik@group.calendar.google.com',
+  'SPS Film' => 'ki1vv5ieoeljjtvh7ihumje7go@group.calendar.google.com',
+  'Lessons' => 'alexforey.com_9rcvmgk971lv19biuqku4bla98@group.calendar.google.com'
+}
 
-# Create a calendar object from a given name
-def calendar(name)
-  Google::Calendar.new(:client_id => ENV['CLIENT_ID'],
-                        :client_secret => ENV['CLIENT_SECRET'],
-                        :redirect_url => "urn:ietf:wg:oauth:2.0:oob",
-                        :calendar => name,
-                        :refresh_token => ENV['REFRESH_TOKEN'])
+def calendar(id)
+  cal = Google::Calendar.new(
+    :client_id     => ENV['CLIENT_ID'],
+    :client_secret => ENV['CLIENT_SECRET'],
+    :calendar      => id,
+    :redirect_url  => "urn:ietf:wg:oauth:2.0:oob" # this is what Google uses for 'applications'
+  )
+
+  cal.login_with_refresh_token(ENV['REFRESH_TOKEN'])
+
+  return cal
 end
 
 # Find out which events are happening right now
@@ -24,10 +34,9 @@ def events_now
   events = []
 
   # Loop over all the calendars
-  CALENDARS.each do |name|
+  CALENDARS.each do |name, id|
 
-    # Get events occuring right now
-    cal_events = calendar(name).find_events_in_range(Time.now, Time.now + 60)
+    cal_events = calendar(id).find_events_in_range(Time.now - 60, Time.now + 60)
 
     # Is there more than one event right now?
     if cal_events.kind_of?(Array)
@@ -53,6 +62,8 @@ end
 
 ##### Main Script #####
 
+
+
 # Get the events
 events = events_now
 
@@ -76,7 +87,7 @@ end
 # Did we end up with an event?
 if event
   # Yes, so build the payload with "|" between each part
-  payload = "Alex is at:|#{event[:event].title}|#{event[:event].where}|(#{event[:cal]} Calendar)"
+  payload = "Alex is at:|#{event[:event].title}|#{event[:event].location}|(#{event[:cal]} Calendar)"
 else
   # No, so say we're not busy
   payload = "Alex is currently| | Not busy| "
