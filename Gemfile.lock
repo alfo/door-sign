@@ -1,3 +1,10 @@
+GIT
+  remote: git@github.com:alfo/google_calendar.git
+  revision: 3e4c14bf3a9a2d70b9b809c2c5c39c7bcf5612a1
+  specs:
+    google_calendar (0.4.0)
+      signet (>= 0.5.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -10,8 +17,6 @@ GEM
     addressable (2.3.6)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
-    google_calendar (0.4.1)
-      signet (>= 0.5.1)
     httparty (0.13.1)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
@@ -38,5 +43,5 @@ PLATFORMS
 
 DEPENDENCIES
   activesupport
-  google_calendar
+  google_calendar!
   ruby_spark

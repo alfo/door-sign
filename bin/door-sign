@@ -36,21 +36,12 @@ def events_now
   # Loop over all the calendars
   CALENDARS.each do |name, id|
 
-    cal_events = calendar(id).find_events_in_range(Time.now - 60, Time.now + 60)
+    # I used to use
+    cal_events = calendar(id).find_events_in_range(Time.now, Time.now + 60)
 
-    # Is there more than one event right now?
-    if cal_events.kind_of?(Array)
-
-      # Yes, so loop over each one and add it to the array
-      cal_events.each do |e|
-        events << {event: e, cal: name} unless e.nil?
-      end
-
-    else
-
-      # No, so just add the one
-      events << {event: cal_events, cal: name} unless cal_events.nil?
-
+    # Loop over each one and add it to the array
+    cal_events.each do |e|
+      events << {event: e, cal: name} unless e.nil?
     end
 
   end
