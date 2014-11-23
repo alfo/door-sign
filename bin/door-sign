@@ -36,7 +36,7 @@ def events_now
   # Loop over all the calendars
   CALENDARS.each do |name, id|
 
-    # I used to use
+    # Get the events
     cal_events = calendar(id).find_events_in_range(Time.now, Time.now + 60)
 
     # Loop over each one and add it to the array

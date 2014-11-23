@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:alfo/google_calendar.git
+  remote: git://github.com/alfo/google_calendar.git
   revision: 3e4c14bf3a9a2d70b9b809c2c5c39c7bcf5612a1
   specs:
     google_calendar (0.4.0)
