@@ -29,7 +29,7 @@ Put all the code on a Heroku thing.
 
 Obtain a Google Client ID and Secret:
 
-1. Go to the {Google Developers Console}[https://console.developers.google.com/].
+1. Go to the (Google Developers Console)[https://console.developers.google.com/].
 2. Select a project, or create a new one.
 3. In the sidebar on the left, expand APIs & auth. Next, click APIs. In the list of APIs, make sure the status is ON for the Calendar API.
 4. In the sidebar on the left, select Credentials.
@@ -44,7 +44,7 @@ Spark ID is the device ID for your core that can be found in the IDE by clicking
 
 <b>Next, find your calendar IDs</b>
 
-1. Visit {Google Calendar}[https://www.google.com/calendar/] in your web browser.
+1. Visit (Google Calendar)[https://www.google.com/calendar/] in your web browser.
 2. In the calendar list on the left, click the down-arrow button next to the appropriate calendar, then select Calendar settings.
 3. In the Calendar Address section, locate the Calendar ID listed next to the XML, ICAL and HTML buttons.
 4. Copy the Calendar ID.
