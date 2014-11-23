@@ -27,11 +27,33 @@ Then flash it to the Spark with the little lightning bolt button.
 
 Put all the code on a Heroku thing.
 
-Add your config:
+Obtain a Google Client ID and Secret:
 
-    heroku config:set USERNAME="myname@gmail.com" PASSWORD="gmailsecret" SPARK_ID="mysparkid" SPARK_TOKEN="mysparktoken"
+1. Go to the {Google Developers Console}[https://console.developers.google.com/].
+2. Select a project, or create a new one.
+3. In the sidebar on the left, expand APIs & auth. Next, click APIs. In the list of APIs, make sure the status is ON for the Calendar API.
+4. In the sidebar on the left, select Credentials.
+5. In either case, you end up on the Credentials page and can create your project's credentials from here.
+6. If you haven't done so already, create your OAuth 2.0 credentials by clicking Create new Client ID under the OAuth heading. Use the "Installed Application" option, with "Other" as the platform. Next, look for your application's client ID and client secret in the relevant table. You may also create and edit redirect URIs from this page.
 
-Username and password are for the Google account you want to monitor. Spark ID is the device ID for your core that can be found in the IDE by clicking the target symbol in the bottom left and then the arrow next to your core. Your Spark token can be found in the settings page of your Spark IDE.
+__Add your config__:
+
+    heroku config:set CLIENT_ID="abc" CLIENT_SECRET="def" SPARK_ID="mysparkid" SPARK_TOKEN="mysparktoken"
+
+Spark ID is the device ID for your core that can be found in the IDE by clicking the target symbol in the bottom left and then the arrow next to your core. Your Spark token can be found in the settings page of your Spark IDE.
+
+<b>Next, find your calendar IDs</b>
+
+1. Visit {Google Calendar}[https://www.google.com/calendar/] in your web browser.
+2. In the calendar list on the left, click the down-arrow button next to the appropriate calendar, then select Calendar settings.
+3. In the Calendar Address section, locate the Calendar ID listed next to the XML, ICAL and HTML buttons.
+4. Copy the Calendar ID.
+
+Edit `bin/door-sign` and add the IDs and each calendar's friendly name.
+
+Next, you need to obtain an access token (refresh token). To do so, run this command and follow the instructions:
+
+    heroku run bundle exec ruby bin/authorize
 
 Then add a scheduler to run the update script:
 
